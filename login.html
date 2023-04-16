@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login Page</title>
+    <title>Car Pooling Website</title>
   </head>
   <body>
     <h1>Login</h1>
@@ -21,31 +21,42 @@
       const passwordInput = document.querySelector('#password');
       const loginBtn = document.querySelector('#loginBtn');
 
-      form.addEventListener('submit', async (event) => {
+
+
+      document.getElementById("loginForm").addEventListener("submit", function(event) {
         event.preventDefault();
-
-        const response = await fetch('https://example.com/api/login', {
-          method: 'POST',
+        var form = event.target;
+        var data = {
+          username: form.elements["username"].value,
+          password: form.elements["password"].value,
+        };
+        var requestParams = {
+          method: "POST",
+          body: JSON.stringify(data),
           headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: usernameInput.value,
-            password: passwordInput.value
-          })
-        });
-
-        if (response.ok) {
-          const userInfo = await response.json();
-          // store user info in cookie
-          document.cookie = `userInfo=${JSON.stringify(userInfo)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
-          
-          // redirect to dashboard page
-          window.location.href = '/dashboard.html';
-        } else {
-          alert('Login failed. Please try again.');
+            "Content-Type": "application/json"
+          }
         }
+
+        fetch("https://7y4c2hpftd.execute-api.us-east-1.amazonaws.com/dev/login", requestParams)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then(userInfo => {
+          document.cookie = `userInfo=${JSON.stringify(userInfo)}; expires=Fri, 31 Dec 100 23:59:59 GMT; path=/`;
+          console.log("cookie: ", document.cookie);
+          window.location.href = 'select.html';
+          // show success message to user
+        })
+        .catch(error => {
+          console.error("API error:", error);
+          // show error message to user
+        });
       });
+
     </script>
   </body>
 </html>

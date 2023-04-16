@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Car Poolong Website</title>
+    <style>
+        header {
+          display: flex;
+          justify-content: flex-end;
+        }
+        header a {
+          margin-left: 10px;
+        }
+    </style>
+    <script>
+        function logout() {
+          // Delete the "session" cookie
+          document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+          // Redirect to the index page
+          window.location.href = "index.html";
+        }
+    </script>
+  </head>
+  <body>
+    <header>
+      <a href="profile.html">Profile</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </header>
+    <main>
+      <h1>Add a driver</h1>
+      <form>
+        <label for="departure">Departure:</label>
+        <input type="text" id="departure" name="departure" required><br>
+
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" required><br>
+
+        <label for="start-time">Start Time:</label>
+        <input type="datetime-local" id="start-time" name="start-time" required><br>
+
+        <label for="end-time">End Time:</label>
+        <input type="datetime-local" id="end-time" name="end-time" required><br>
+
+        <button type="submit">Add Driver</button>
+      </form>
+    </main>
+  </body>
+</html>

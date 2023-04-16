@@ -2,9 +2,31 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Driver Management</title>
+    <title>Car Pooling Website</title>
+    <style>
+        header {
+          display: flex;
+          justify-content: flex-end;
+        }
+        header a {
+          margin-left: 10px;
+        }
+    </style>
+    <script>
+        function logout() {
+          // Delete the "session" cookie
+          document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+          // Redirect to the index page
+          window.location.href = "index.html";
+        }
+    </script>
   </head>
   <body>
+    <header>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </header>
     <h1>Driver Management System</h1>
     <p>Select an option below:</p>
     <button onclick="window.location.href='add_driver.html'">Add Driver</button>
