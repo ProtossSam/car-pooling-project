@@ -40,13 +40,16 @@
       function findDriver() {
         // Get departure and destination values
         var departure = $("#departure").val();
+        console.log('departure')
         var destination = $("#destination").val();
+        var start_time = Date.prase($("#start_time").val()) / 1000;
+        var username = JSON.parse(getCookie('userInfo')).username;
 
         // Call external API to find driver
         $.ajax({
-          type: "GET",
-          url: "https://example.com/api/finddriver",
-          data: { departure: departure, destination: destination },
+          type: "POST",
+          url: "https://7y4c2hpftd.execute-api.us-east-1.amazonaws.com/dev/matching_algo",
+          data: { start: departure, destination: destination, start_time: start_time,  username: username},
           success: function(data) {
             // Display driver information
             var driverInfo = "<h2>Driver Information</h2>";
@@ -62,6 +65,18 @@
           }
         });
       }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) 
+        {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+        }
+        return "";
+      }
+
 
       function logout() {
         // Get all cookies

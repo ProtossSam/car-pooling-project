@@ -21,6 +21,23 @@
     <p>Welcome to your profile page!</p>
     
     <script>
+      function logout() {
+        // Get all cookies
+        var cookies = document.cookie.split(";");
+
+        // Delete each cookie by setting its expiration date to the past
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+
+        // Redirect the user to the login page
+        window.location.href = "login.html";
+      }
+
+      
       function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');

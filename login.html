@@ -46,7 +46,7 @@
           return response.json();
         })
         .then(userInfo => {
-          document.cookie = `userInfo=${JSON.stringify(userInfo)}; expires=Fri, 31 Dec 100 23:59:59 GMT; path=/`;
+          document.cookie = `userInfo=${JSON.stringify(userInfo)}; expires=Fri, 31 Dec 100 23:59:59 GMT; path=/; SameSite=None`;
           console.log("cookie: ", document.cookie);
           window.location.href = 'select.html';
           // show success message to user
